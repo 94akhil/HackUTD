@@ -1,0 +1,25 @@
+<nb-card  class="ego-dim">
+    <nb-card-header>Economic Status</nb-card-header>
+    <nb-card-body>
+      <div class="row ">
+        <div class="col-md-3 d-flex justify-content-start tile-1">
+            <ngx-slider class="customer-slider" *ngIf="enableSlider" [(value)]="value" [options]="options"></ngx-slider>
+            <nb-select *ngIf="enableDropDown" placeholder="Efficiency Type" [(selected)]="efficiencyType">
+                <nb-option value="0">Depth-Time</nb-option>
+                <nb-option value="1">Depth-Cost</nb-option>
+            </nb-select>
+        </div>
+        <div class="col-md-5 d-flex justify-content-start"></div>
+        <div class="col-md-4 d-flex justify-content-end tile-3">
+            <nb-select placeholder="Graph Type" [selected]="chartType" (selectedChange)="changeGraph($event)">
+                <nb-option value="0">Bar</nb-option>
+                <nb-option value="1">Line</nb-option>
+                <nb-option value="2">Pie</nb-option>
+            </nb-select>
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <echarts class="d-flex justify-content-center chart-dim" [initOpts]="initOpts" [options]="chartOptions"></echarts>
+      </div>
+    </nb-card-body>
+</nb-card>

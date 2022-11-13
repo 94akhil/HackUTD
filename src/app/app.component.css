@@ -1,0 +1,5 @@
+::ng-deep .nb-theme-default nb-layout .layout .layout-container .content.center{
+    flex: 0 100 100% !important;
+    background:#09598e;
+    /* background:#295979 */
+}

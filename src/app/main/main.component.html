@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row d-flex">
+    <div class="col-md-12">
+      <app-ego-chart-one
+        [xAxisLabel]="xAxisDataOne"
+        [initOpts]="initOptionOne"
+        [seriesData]="seriesDataOne"
+        [enableSlider]="true"
+        [enableDropDown]="false"
+      ></app-ego-chart-one>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-ego-chart-one
+        [xAxisLabel]="xAxisDataTwo"
+        [initOpts]="initOptionTwo"
+        [seriesData]="seriesDataTwo"
+        [enableSlider]="false"
+        [enableDropDown]="true"
+        [chartType]="'1'"
+      ></app-ego-chart-one>
+    </div>
+    <div class="col-md-6">
+      <app-ego-chart-one
+        [xAxisLabel]="xAxisDataTwo"
+        [initOpts]="initOptionTwo"
+        [seriesData]="seriesDataThree"
+        [enableSlider]="false"
+        [enableDropDown]="false"
+        [chartType]="'1'"
+      ></app-ego-chart-one>
+    </div>
+  </div>
+</div>

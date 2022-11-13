@@ -1,0 +1,32 @@
+.ego-dim{
+    width: 100%;
+    border-radius:1.25rem
+}
+
+.chart-dim{
+    height: 300px;
+}
+
+.tile-1{
+    padding-left: 2.3rem;
+}
+
+.tile-3{
+    padding-right: 2.6rem;
+}
+
+.customer-slider{
+    margin-left:0.9rem
+}
+
+::ng-deep .ngx-slider .ngx-slider-pointer {
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+    top: -8px !important;
+}
+
+::ng-deep .ngx-slider .ngx-slider-pointer:after{
+    top: 5.5px !important;
+    left: 5.5px !important;
+}
+
