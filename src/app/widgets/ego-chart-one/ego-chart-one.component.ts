@@ -11,6 +11,7 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
   @Input() enableSlider= true
   @Input() enableDropDown = false
   @Input() enableDropDown2 = false
+  @Input() enableDropDown3 = false
   @Input() xAxisLabel = []
   @Input() seriesData = []
   @Input() initOpts = {
@@ -21,9 +22,13 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
   @Input() chartType="0"
 
   @Output() range = new EventEmitter()
+  @Output() astroid = new EventEmitter()
+  @Output() parameterSelected = new EventEmitter()
   
-  efficiencyType="1"
-  parameter="1"
+  @Input() efficiencyType="cost"
+  parameter="BIT_DEPTH"
+  @Input() astroidId="2"
+  astroidId2="2"
 
   @Input() value = 0.5;
   options: Options = {
@@ -88,6 +93,16 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
     this.ngOnChanges()
     console.log(this.chartOptions.series[0])
 
+  }
+
+  changeAstroid(e){
+    console.log(e)
+    this.astroid.emit({e: e,kind:this.efficiencyType})
+  }
+
+  changeAstroidKind(e){
+    console.log(e)
+    this.astroid.emit({e: this.astroidId,kind:e})
   }
 
   sendRange(e){

@@ -4,28 +4,39 @@
       <div class="row ">
         <div class="col-md-4 d-flex justify-content-start tile-1">
             <ngx-slider class="customer-slider" *ngIf="enableSlider" [(value)]="value" [options]="options" (valueChange)="sendRange($event)"></ngx-slider>
-            <nb-select *ngIf="enableDropDown" placeholder="Efficiency Type" [(selected)]="efficiencyType">
-                <nb-option value="0">Depth-Time</nb-option>
-                <nb-option value="1">Depth-Cost</nb-option>
+            <nb-select *ngIf="enableDropDown" placeholder="Efficiency Type" [selected]="efficiencyType" (selectedChange)="changeAstroidKind($event)">
+                <nb-option value="time">Depth-Time</nb-option>
+                <nb-option value="cost">Depth-Cost</nb-option>
             </nb-select>
 
-            <nb-select *ngIf="enableDropDown2" placeholder="Parameter" [(selected)]="parameter">
-                <nb-option value="1">Bit Depth</nb-option>
-                <nb-option value="2">Rate of Penetration</nb-option>
-                <nb-option value="3">Hook Load</nb-option>
-                <nb-option value="4">Differential Pressure</nb-option>
-                <nb-option value="5">Weight On Bit</nb-option>
+            <nb-select *ngIf="enableDropDown3" placeholder="Parameter" [selected]="parameter" (selectedChange)="changeParameter($event)">
+                <nb-option value="BIT_DEPTH">Bit Depth</nb-option>
+                <nb-option value="RATE_OF_PENETRATION">Rate of Penetration</nb-option>
+                <nb-option value="HOOK_LOAD">Hook Load</nb-option>
+                <nb-option value="DIFFERENTIAL_PRESSURE">Differential Pressure</nb-option>
+                <nb-option value="WEIGHT_ON_BIT">Weight On Bit</nb-option>
             </nb-select>
+
+            
             
         </div>
         <div class="col-md-4 d-flex justify-content-start">
-            <nb-select *ngIf="enableDropDown" placeholder="Astroid Id" [(selected)]="astroidId">
+            <nb-select *ngIf="enableDropDown" placeholder="Astroid Id" [selected]="astroidId" (selectedChange)="changeAstroid($event)">
                 <nb-option value="1">Astroid 1</nb-option>
                 <nb-option value="2">Astroid 2</nb-option>
                 <nb-option value="3">Astroid 3</nb-option>
                 <nb-option value="4">Astroid 4</nb-option>
                 <nb-option value="5">Astroid 5</nb-option>
             </nb-select>
+
+            <nb-select *ngIf="enableDropDown3" placeholder="Astroid Id" [selected]="astroidId2" (selectedChange)="changeAstroidParamter($event)">
+                <nb-option value="1">Astroid 1</nb-option>
+                <nb-option value="2">Astroid 2</nb-option>
+                <nb-option value="3">Astroid 3</nb-option>
+                <nb-option value="4">Astroid 4</nb-option>
+                <nb-option value="5">Astroid 5</nb-option>
+            </nb-select>
+           
         </div>
         <div class="col-md-4 d-flex justify-content-end tile-3">
             <nb-select placeholder="Graph Type" [selected]="chartType" (selectedChange)="changeGraph($event)">

@@ -11,7 +11,7 @@ export class MainComponent implements OnInit {
   allTabs=[1,2]
   xAxisDataOne=[]
   seriesDataOne = [{
-    name: 'Counters',
+    name: 'Value',
     type: 'bar',
     barWidth: '60%',
     data: []
@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
 
   xAxisDataTwo=['Buzz Drilldrin', 'AstroBit', 'Apollo', 'ChallengDriller']
   seriesDataTwo = [{
-    name: 'Counters',
+    name: 'Value',
     type: 'line',
     barWidth: '60%',
     data: [10, 52, 200, 334, 390, 330, 220]
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit {
   };
 
   seriesDataThree = [{
-    name: 'Counters',
+    name: 'Value',
     type: 'line',
     barWidth: '60%',
     data: [10, 52, 200, 334, 390, 330, 220]
@@ -44,6 +44,8 @@ export class MainComponent implements OnInit {
 
   sliderRange=0.5
 
+  graph2aid="2"
+  graph2kind="cost"
   economicRecords;
 
   loadWidOne= false
@@ -55,7 +57,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.loadGraphOne(0.5)
-    
+    this.fetchEfficiency({e:2,kind:'cost'})
+    // this.fetchParameterBehaviour({e:2, param:})
   }
 
   loadGraphOne(range){
@@ -82,25 +85,6 @@ export class MainComponent implements OnInit {
     })
   }
 
-  loadGraphTwo(){
-    let xAxisData=[]
-    let seriesData = []
-    this.loadWidTwo = false
-    this.egoService.getAstroidCostDetails().subscribe(records => {
-      for (let i = 1; i <=20 ; i++){
-        
-        xAxisData.push(i.toString())
-      }
-      
-      this.seriesDataOne[0].data=seriesData
-    
-      this.xAxisDataTwo=xAxisData
-      this.loadWidTwo = true
-    
-
-
-    })
-  }
 
   ngOnChanges(){
     
@@ -112,6 +96,57 @@ export class MainComponent implements OnInit {
 
   }
     
+  fetchEfficiency({e, kind}){
+    this.loadWidTwo = false
+    
+    this.egoService.getAstroidEfficiency(e).subscribe(records => {
+      
+      let depth = [records[e]['bit_stats']['Buzz Drilldrin'][0],records[e]['bit_stats']['AstroBit'][0],records[e]['bit_stats']['Apollo'][0],records[e]['bit_stats']['ChallengDriller'][0]]
+      let cost = [records[e]['bit_stats']['Buzz Drilldrin'][1],records[e]['bit_stats']['AstroBit'][1],records[e]['bit_stats']['Apollo'][1],records[e]['bit_stats']['ChallengDriller'][1]]
+      let time = [records[e]['bit_stats']['Buzz Drilldrin'][2],records[e]['bit_stats']['AstroBit'][2],records[e]['bit_stats']['Apollo'][2],records[e]['bit_stats']['ChallengDriller'][2]]
+
+      console.log(depth)
+      console.log(cost)
+      console.log(time)
+
+      this.seriesDataTwo[0].data=[]
+      if (kind == 'cost'){
+        for (let i = 0; i <4 ; i++){
+          if (depth[i] > 0 && cost[i] > 0 ){
+            this.seriesDataTwo[0].data.push(depth[i]/cost[i])
+          }
+          else{
+            this.seriesDataTwo[0].data.push(0)
+          }
+          
+        }
+      }
+      else{
+        for (let i = 0; i <4 ; i++){
+          if (depth[i] > 0 && time[i] > 0 ){
+            this.seriesDataTwo[0].data.push(depth[i]/time[i])
+          }
+          else{
+            this.seriesDataTwo[0].data.push(0)
+          }
+          
+        }
+      }
+      console.log(this.seriesDataTwo[0].data)
+      this.graph2aid=e
+      this.graph2kind=kind
+      this.loadWidTwo = true
+
+    })
+  }
+
+  fetchParameterBehaviour({id,param}){
+    this.loadWidThree = false
+    this.loadWidThree = true
+    this.egoService.getAstroidParameters(id,param).subscribe(records=>{
+
+    })
+  }
   
 
 }
