@@ -140,13 +140,13 @@ export class MainComponent implements OnInit {
     })
   }
 
-  fetchParameterBehaviour({id,param}){
-    this.loadWidThree = false
-    this.loadWidThree = true
-    this.egoService.getAstroidParameters(id,param).subscribe(records=>{
+  // fetchParameterBehaviour({id,param}){
+  //   this.loadWidThree = false
+  //   this.loadWidThree = true
+  //   this.egoService.getAstroidParameters(id,param).subscribe(records=>{
 
-    })
-  }
+  //   })
+  // }
   
 
 }
