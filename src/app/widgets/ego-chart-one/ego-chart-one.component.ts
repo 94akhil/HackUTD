@@ -24,6 +24,7 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
   @Output() range = new EventEmitter()
   @Output() astroid = new EventEmitter()
   @Output() parameterSelected = new EventEmitter()
+  @Output() astroid2 = new EventEmitter()
   
   @Input() efficiencyType="cost"
   parameter="BIT_DEPTH"
@@ -103,6 +104,14 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
   changeAstroidKind(e){
     console.log(e)
     this.astroid.emit({e: this.astroidId,kind:e})
+  }
+
+  changeAstroid2(e){
+    this.astroid2.emit({id: e,param:this.parameter})
+  }
+
+  changeAstroidParamter(e){
+    this.astroid2.emit({id: this.astroidId2,param:e})
   }
 
   sendRange(e){

@@ -35,6 +35,7 @@ export class MainComponent implements OnInit {
     height: 300
   };
 
+  xAxisDataThree=[]
   seriesDataThree = [{
     name: 'Value',
     type: 'line',
@@ -51,14 +52,17 @@ export class MainComponent implements OnInit {
   loadWidOne= false
   loadWidTwo= false
   loadWidThree= false
+  loadWidFour=false
   constructor(private egoService:EgoServiceService) {
       
    }
 
   ngOnInit() {
+    // this.fetchParameterTime({id:2,param:'TIMESTAMP'})
     this.loadGraphOne(0.5)
     this.fetchEfficiency({e:2,kind:'cost'})
-    // this.fetchParameterBehaviour({e:2, param:})
+    
+    this.fetchParameters({id:2, param:'BIT_DEPTH'})
   }
 
   loadGraphOne(range){
@@ -140,13 +144,29 @@ export class MainComponent implements OnInit {
     })
   }
 
-  // fetchParameterBehaviour({id,param}){
-  //   this.loadWidThree = false
-  //   this.loadWidThree = true
-  //   this.egoService.getAstroidParameters(id,param).subscribe(records=>{
+  fetchParameters({id,param}){
+    this.fetchParameterTime({id,param:'TIMESTAMP'})
+    this.fetchParameterBehaviour({id,param})
+  }
 
-  //   })
-  // }
+  fetchParameterTime({id,param}){
+    this.loadWidFour = false
+    this.egoService.getAstroidParameters(id,param).subscribe(records=>{
+      this.xAxisDataThree=records[id][param]
+      this.loadWidFour = true
+    })
+  }
+
+  fetchParameterBehaviour({id,param}){
+    this.loadWidThree = false
+    
+    this.egoService.getAstroidParameters(id,param).subscribe(records=>{
+      console.log(records[id][param])
+      this.seriesDataThree[0].data=records[id][param]
+      this.loadWidThree = true
+    })
+    
+  }
   
 
 }

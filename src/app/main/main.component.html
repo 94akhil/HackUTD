@@ -30,8 +30,8 @@
       ></app-ego-chart-one>
     </div>
     <div class="col-md-6">
-      <app-ego-chart-one
-        [xAxisLabel]="xAxisDataTwo"
+      <app-ego-chart-one *ngIf="loadWidThree"
+        [xAxisLabel]="xAxisDataThree"
         [initOpts]="initOptionTwo"
         [seriesData]="seriesDataThree"
         [enableSlider]="false"
@@ -40,6 +40,7 @@
         [enableDropDown3] = "true"
         [chartType]="'1'"
         [title]="'Drill Parameter Behaviour'"
+        (astroid2)="fetchParameters($event)"
       ></app-ego-chart-one>
     </div>
   </div>

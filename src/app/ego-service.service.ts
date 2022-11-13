@@ -23,6 +23,6 @@ export class EgoServiceService {
 
   getAstroidParameters(id, parameter){
     // return this.http.get('/api/get_column?asteroid_id='+2+'&column_name='+parameter)
-    // return this.http.get(this.url+'get_efficiencies?asteroid_id='+id)
+    return this.http.get(this.url+'get_column?asteroid_id='+id+'&column_name='+parameter)
   }
 }
