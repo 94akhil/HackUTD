@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,OnChanges } from '@angular/core';
+import { Component, Input, OnInit,OnChanges, EventEmitter,Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
@@ -7,9 +7,10 @@ import { Options } from '@angular-slider/ngx-slider';
   styleUrls: ['./ego-chart-one.component.css']
 })
 export class EgoChartOneComponent implements OnInit, OnChanges {
-
+  @Input() title = ""
   @Input() enableSlider= true
   @Input() enableDropDown = false
+  @Input() enableDropDown2 = false
   @Input() xAxisLabel = []
   @Input() seriesData = []
   @Input() initOpts = {
@@ -18,10 +19,13 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
     height: 300
   };
   @Input() chartType="0"
+
+  @Output() range = new EventEmitter()
   
   efficiencyType="1"
+  parameter="1"
 
-  value = 0.5;
+  @Input() value = 0.5;
   options: Options = {
     floor: 0,
     ceil: 1,
@@ -57,7 +61,7 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
     series: []
   };
   
-  
+
   constructor() { }
 
   ngOnInit() {
@@ -81,7 +85,14 @@ export class EgoChartOneComponent implements OnInit, OnChanges {
       case '2':
         this.chartOptions.series[0].type= 'pie'
     }
+    this.ngOnChanges()
     console.log(this.chartOptions.series[0])
+
+  }
+
+  sendRange(e){
+    console.log('range '+e)
+    this.range.emit(e)
 
   }
 
